@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Containerauth from "../components/Containerauth.jsx";
 import Itemauth from "../components/Itemauth.jsx";
 import Botonauth from "../components/Botonauth.jsx";
@@ -10,38 +11,33 @@ function Login() {
   const [apiResponse, setApiResponse] = useState(null);
   const [errorUsername, setErrorUsername] = useState("");
   const [errorPassword, setErrorPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-    
-
-        const res = await fetch("https://backendloginprom.onrender.com/auth/login", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ username, password }),
-        });
-
+      const res = await fetch("https://backendloginprom.onrender.com/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password }),
+      });
 
       const data = await res.json();
       setApiResponse(data);
 
       if (res.ok) {
-        // limpiar errores si login fue exitoso
+        // Limpiar errores si el login fue exitoso
         setErrorUsername("");
         setErrorPassword("");
-      
-        // guardar el token en sessionStorage
-      if (data.token) {
-        sessionStorage.setItem("token", data.token);
-        console.log("Token guardado en sessionStorage:", data.token);
-        window.location.href = "/cursos";
-
-      }
-
-      
+        
+        // Guardar el token en sessionStorage y navegar con react-router-dom
+        if (data.token) {
+          sessionStorage.setItem("token", data.token);
+          console.log("Token guardado en sessionStorage:", data.token);
+          navigate("/cursos");
+        }
       } else {
-        // según el status, mostrar error en el campo correcto
+        // Según el status, mostrar error en el campo correcto
         if (data.status === 404) {
           setErrorUsername(data.message);
           setErrorPassword("");
@@ -96,21 +92,17 @@ function Login() {
           </Containerdata>
         </form>
 
-        
         {/* Link de recovery */}
         <p style={{ marginTop: "15px" }}>
           Te olvidaste la contrasenia?{" "}
           <a href="/recovery" style={{ color: "lightblue" }}>CambiarContrasenia</a>
         </p>
-   
-
 
         {/* Link de registro */}
         <p style={{ marginTop: "15px" }}>
           No tienes cuenta?{" "}
           <a href="/register" style={{ color: "lightblue" }}>Registrate</a>
         </p>
-
 
         {/* Debug opcional: mostrar JSON completo */}
         {apiResponse && (

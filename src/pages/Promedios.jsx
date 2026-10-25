@@ -17,7 +17,7 @@ function Promedios() {
       headers: { "Authorization": `Bearer ${token}` }
     })
       .then(res => res.json())
-      .then(data => setPromedios(data))
+      .then(data => setPromedios(Array.isArray(data) ? data : data.content || []))
       .catch(err => console.error("Error al obtener promedios:", err));
   }, []);
 
@@ -35,7 +35,7 @@ function Promedios() {
         preciomediares: parseFloat(precioMediares),
         novillokg: parseFloat(novilloKg),
         totalkg: parseFloat(totalKg),
-        fechadecreacion: fechaDeCreacion
+        created: fechaDeCreacion // 👈 Cambiado de fechadecreacion a created
       })
     });
 

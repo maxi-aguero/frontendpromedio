@@ -59,6 +59,10 @@ function PromedioDetalle() {
             <th style={{ padding: "12px", textAlign: "left", backgroundColor: "#f8fafc", color: "#0d2b45" }}>Costo Real</th>
             <td style={{ padding: "12px", color: "#0d2b45" }}>${promedio.costoreal?.toFixed(2)}</td>
           </tr>
+          <tr style={{ borderBottom: "1px solid #e2e8f0" }}>
+            <th style={{ padding: "12px", textAlign: "left", backgroundColor: "#f8fafc", color: "#0d2b45" }}>Total compra</th>
+            <td style={{ padding: "12px", color: "#0d2b45" }}>${promedio.totalcompra?.toFixed(2)}</td>
+          </tr>
           <tr>
             <th style={{ padding: "12px", textAlign: "left", backgroundColor: "#f8fafc", color: "#0d2b45" }}>Fecha de Creación</th>
             <td style={{ padding: "12px", color: "#0d2b45" }}>{promedio.created ? new Date(promedio.created).toLocaleDateString() : "Sin fecha"}</td>

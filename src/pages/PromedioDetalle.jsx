@@ -35,12 +35,11 @@ function PromedioDetalle() {
 
   // 1. Array simulado de cortes mientras el backend lo incorpora
   const cortesSimulados = [
-    { producto: "Asado", kg: 22.5, precioKg: 14500 },
-    { producto: "Vacío", kg: 12.0, precioKg: 16000 },
-    { producto: "Matambre", kg: 8.5, precioKg: 15500 },
-    { producto: "Lomo", kg: 6.2, precioKg: 18000 },
-    { producto: "Nalga", kg: 15.0, precioKg: 15000 },
-    { producto: "Carnaza", kg: 14.77, precioKg: 11000 }
+    
+    
+    { producto: "Bife ancho", kg: 3.00, precioKg: 15442 },
+    { producto: "Bife angosto", kg: 3.40, precioKg: 17456 },
+    { producto: "Bife medio", kg: 3.10, precioKg: 17456 }
   ];
 
   // Si el backend ya trae 'cortes' o 'detalles', los usa; si no, usa el array simulado
@@ -116,7 +115,7 @@ function PromedioDetalle() {
         <table style={{ width: "100%", borderCollapse: "collapse", backgroundColor: "#ffffff", color: "#0d2b45", boxShadow: "0 2px 5px rgba(0,0,0,0.05)", borderRadius: "8px", overflow: "hidden" }}>
           <thead>
             <tr style={{ backgroundColor: "#f8fafc", color: "#0d2b45", borderBottom: "2px solid #e2e8f0" }}>
-              <th style={{ padding: "12px", textAlign: "left" }}>Producto / Corte</th>
+              <th style={{ padding: "12px", textAlign: "left" }}>Corte</th>
               <th style={{ padding: "12px", textAlign: "right" }}>Kg</th>
               <th style={{ padding: "12px", textAlign: "right" }}>Precio x Kg</th>
               <th style={{ padding: "12px", textAlign: "right" }}>Subtotal</th>

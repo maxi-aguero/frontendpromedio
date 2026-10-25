@@ -11,6 +11,9 @@ import Cursos from "./pages/Cursos.jsx";
 import Borrar from "./pages/Borrar.jsx";
 import CursoDetalle from "./pages/CursoDetalle.jsx"; 
 
+import Promedios from "./pages/Promedios.jsx";
+
+
 
 function App() {
   return (
@@ -23,6 +26,7 @@ function App() {
       <Route path="/cursos" element={<Cursos />} />
 
       <Route path="/cursos/:id" element={<CursoDetalle />} />  
+      <Route path="/promedios" element={<Promedios />} />
 
       <Route path="/borrar" element={<Borrar />} />
 

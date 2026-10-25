@@ -156,7 +156,7 @@ function PromedioDetalle() {
           {cortes.length > 0 && (
             <tfoot>
               <tr style={{ backgroundColor: "#f1f5f9", fontWeight: "bold" }}>
-                <td style={{ padding: "12px", color: "#0d2b45" }}>Total Vendido</td>
+                <td style={{ padding: "12px", color: "#0d2b45" }}>Total venta</td>
                 <td style={{ padding: "12px", textAlign: "right", color: "#0d2b45" }}>
                   {cortes.reduce((acc, item) => acc + (item.kg || item.cantidadKg || 0), 0).toFixed(2)} kg
                 </td>

@@ -39,7 +39,23 @@ function PromedioDetalle() {
     
     { producto: "Bife ancho", kg: 3.00, precioKg: 15442 },
     { producto: "Bife angosto", kg: 3.40, precioKg: 17456 },
-    { producto: "Bife medio", kg: 3.10, precioKg: 17456 }
+    { producto: "Bife medio", kg: 3.10, precioKg: 17456 },
+    
+    { producto: "Litoraleño", kg: 0, precioKg: 0 },
+    { producto: "Bide de chorizo", kg: 1.69, precioKg: 24842 },
+    { producto: "Asado medio", kg: 6.80, precioKg: 19068 },
+    { producto: "Roast beef", kg: 2.49, precioKg: 16785 },
+    { producto: "Espinazo", kg: 2.78, precioKg: 4028 },
+    { producto: "Aguja especial", kg: 0, precioKg: 13428 },
+    { producto: "Arañita", kg: 0.18, precioKg: 24842 },
+    { producto: "Falda", kg: 0, precioKg: 14099 },
+    { producto: "Sima", kg: 1.50, precioKg: 18799 },
+    { producto: "T asado", kg: 2.51, precioKg: 17456 },
+    { producto: "T nalga", kg: 1.60, precioKg: 17456 },
+    { producto: "Osobuco", kg: 3.63, precioKg: 14099 },
+    { producto: "Orilla/asado promo", kg: 2.46, precioKg: 14099 },
+    { producto: "Nalga", kg: 4.00, precioKg: 19068 }
+    
   ];
 
   // Si el backend ya trae 'cortes' o 'detalles', los usa; si no, usa el array simulado

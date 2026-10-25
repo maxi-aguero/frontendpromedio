@@ -30,21 +30,49 @@ function PromedioDetalle() {
   }
 
   if (!promedio) {
-    return <p style={{ padding: "20px", color: "#fff" }}>Cargando detalles...</p>;
+    return <p style={{ padding: "20px", color: "#0d2b45" }}>Cargando detalles...</p>;
   }
 
   return (
-    <div style={{ padding: "20px", backgroundColor: "#0f111a", minHeight: "100vh", color: "#fff" }}>
+    <div style={{ padding: "30px", backgroundColor: "#ffffff", minHeight: "100vh", color: "#0d2b45", fontFamily: "sans-serif" }}>
       <h2>Detalle del Promedio #{promedio.id}</h2>
       
-      <p><strong>Precio Mediares:</strong> ${promedio.preciomediares}</p>
-      <p><strong>Kg de la Mediares:</strong> {promedio.novillokg}</p>
-      <p><strong>Kg Totales Utilizables:</strong> {promedio.totalkg}</p>
-      <p><strong>Costo Real:</strong> ${promedio.costoreal?.toFixed(2)}</p>
-      <p><strong>Fecha de Creación:</strong> {promedio.created ? new Date(promedio.created).toLocaleDateString() : "Sin fecha"}</p>
+      <table style={{ width: "100%", maxWidth: "600px", borderCollapse: "collapse", marginTop: "20px", backgroundColor: "#ffffff", color: "#0d2b45", boxShadow: "0 2px 5px rgba(0,0,0,0.1)" }}>
+        <tbody>
+          <tr style={{ borderBottom: "1px solid #e2e8f0" }}>
+            <th style={{ padding: "12px", textAlign: "left", backgroundColor: "#f8fafc", color: "#0d2b45", width: "40%" }}>ID</th>
+            <td style={{ padding: "12px", color: "#0d2b45" }}>{promedio.id}</td>
+          </tr>
+          <tr style={{ borderBottom: "1px solid #e2e8f0" }}>
+            <th style={{ padding: "12px", textAlign: "left", backgroundColor: "#f8fafc", color: "#0d2b45" }}>Precio Mediares</th>
+            <td style={{ padding: "12px", color: "#0d2b45" }}>${promedio.preciomediares}</td>
+          </tr>
+          <tr style={{ borderBottom: "1px solid #e2e8f0" }}>
+            <th style={{ padding: "12px", textAlign: "left", backgroundColor: "#f8fafc", color: "#0d2b45" }}>Kg de la Mediares</th>
+            <td style={{ padding: "12px", color: "#0d2b45" }}>{promedio.novillokg}</td>
+          </tr>
+          <tr style={{ borderBottom: "1px solid #e2e8f0" }}>
+            <th style={{ padding: "12px", textAlign: "left", backgroundColor: "#f8fafc", color: "#0d2b45" }}>Kg Totales Utilizables</th>
+            <td style={{ padding: "12px", color: "#0d2b45" }}>{promedio.totalkg}</td>
+          </tr>
+          <tr style={{ borderBottom: "1px solid #e2e8f0" }}>
+            <th style={{ padding: "12px", textAlign: "left", backgroundColor: "#f8fafc", color: "#0d2b45" }}>Costo Real</th>
+            <td style={{ padding: "12px", color: "#0d2b45" }}>${promedio.costoreal?.toFixed(2)}</td>
+          </tr>
+          <tr>
+            <th style={{ padding: "12px", textAlign: "left", backgroundColor: "#f8fafc", color: "#0d2b45" }}>Fecha de Creación</th>
+            <td style={{ padding: "12px", color: "#0d2b45" }}>{promedio.created ? new Date(promedio.created).toLocaleDateString() : "Sin fecha"}</td>
+          </tr>
+        </tbody>
+      </table>
       
       <br />
-      <button onClick={() => navigate("/promedios")}>Volver a la lista</button>
+      <button 
+        onClick={() => navigate("/promedios")} 
+        style={{ marginTop: "15px", padding: "10px 20px", backgroundColor: "#0d2b45", color: "#ffffff", border: "none", cursor: "pointer", borderRadius: "4px" }}
+      >
+        Volver a la lista
+      </button>
     </div>
   );
 }

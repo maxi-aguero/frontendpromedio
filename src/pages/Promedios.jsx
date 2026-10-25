@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom"; // 👈 1. Importamos el hook de navegación
 import Container from "../components/Container.jsx";
 import Item from "../components/Item.jsx";
 
 function Promedios() {
+  const navigate = useNavigate(); // 👈 2. Inicializamos navigate
   const [promedios, setPromedios] = useState([]);
   const [precioMediares, setPrecioMediares] = useState("");
   const [novilloKg, setNovilloKg] = useState("");
@@ -35,7 +37,7 @@ function Promedios() {
         preciomediares: parseFloat(precioMediares),
         novillokg: parseFloat(novilloKg),
         totalkg: parseFloat(totalKg),
-        created: fechaDeCreacion // 👈 Cambiado de fechadecreacion a created
+        created: fechaDeCreacion
       })
     });
 
@@ -57,12 +59,17 @@ function Promedios() {
         <h2>Lista de Promedios</h2>
         <Container color="#0f111a">
           {promedios.map(p => (
-            <Item 
+            <div 
               key={p.id} 
-              id={p.id} 
-              texto={`Precio: $${p.preciomediares} | Kg Novillo: ${p.novillokg} | Kg Utilizables: ${p.totalkg}`} 
-              color="#151724" 
-            />
+              onClick={() => navigate(`/promedios/${p.id}`)} // 👈 3. Redirige al detalle al hacer clic
+              style={{ cursor: "pointer" }}
+            >
+              <Item 
+                id={p.id} 
+                texto={`Precio: $${p.preciomediares} | Kg Novillo: ${p.novillokg} | Kg Utilizables: ${p.totalkg}`} 
+                color="#151724" 
+              />
+            </div>
           ))}
         </Container>
       </section>

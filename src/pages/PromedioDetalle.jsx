@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
 function PromedioDetalle() {
-  const { id } = useParams(); // 👈 Captura el :id de la URL (ej. /promedios/5)
+  const { id } = useParams();
   const navigate = useNavigate();
   const [promedio, setPromedio] = useState(null);
   const [error, setError] = useState("");
@@ -14,7 +14,6 @@ function PromedioDetalle() {
       return;
     }
 
-    // Petición al endpoint que creamos en el backend
     fetch(`https://backendpromedio.onrender.com/api/promedios/${id}`, {
       headers: { "Authorization": `Bearer ${token}` }
     })
@@ -35,7 +34,7 @@ function PromedioDetalle() {
   }
 
   return (
-    <div style={{ padding: "20px", color: "#fff" }}>
+    <div style={{ padding: "20px", backgroundColor: "#0f111a", minHeight: "100vh", color: "#fff" }}>
       <h2>Detalle del Promedio #{promedio.id}</h2>
       
       <p><strong>Precio Mediares:</strong> ${promedio.preciomediares}</p>

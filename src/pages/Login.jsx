@@ -35,7 +35,7 @@ function Login() {
       if (data.token) {
         sessionStorage.setItem("token", data.token);
         console.log("Token guardado en sessionStorage:", data.token);
-        window.location.href = "/cursos";
+        window.location.href = "/promedios";
 
       }
 

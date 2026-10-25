@@ -17,10 +17,7 @@ function Promedios() {
       headers: { "Authorization": `Bearer ${token}` }
     })
       .then(res => res.json())
-      .then(data => {
-        // Aseguramos que guardamos un array (por si el backend a veces devuelve otra estructura)
-        setPromedios(Array.isArray(data) ? data : data.content || []);
-      })
+      .then(data => setPromedios(data))
       .catch(err => console.error("Error al obtener promedios:", err));
   }, []);
 
@@ -63,7 +60,7 @@ function Promedios() {
             <Item 
               key={p.id} 
               id={p.id} 
-              texto={JSON.stringify(p)} 
+              texto={`Precio: $${p.preciomediares} | Kg Novillo: ${p.novillokg} | Kg Utilizables: ${p.totalkg}`} 
               color="#151724" 
             />
           ))}

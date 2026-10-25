@@ -4,7 +4,6 @@ import Itemauth from "../components/Itemauth.jsx";
 import Containerdata from "../components/Containerdata.jsx";
 import Botonauth from "../components/Botonauth.jsx";
 
-
 function Register() {
   const [formData, setFormData] = useState({
     username: "",
@@ -23,6 +22,13 @@ function Register() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    // Limpiamos errores previos al intentar de nuevo
+    setErrorUsername("");
+    setErrorEmail("");
+    setErrorPassword("");
+    setApiResponse(null);
+
     try {
       const res = await fetch("https://backendloginprom.onrender.com/auth/register", {
         method: "POST",
@@ -30,31 +36,38 @@ function Register() {
         body: JSON.stringify(formData),
       });
 
-      const data = await res.json();
+      // Intentamos leer la respuesta de forma segura (puede venir como JSON o texto plano)
+      const contentType = res.headers.get("content-type");
+      let data;
+      if (contentType && contentType.includes("application/json")) {
+        data = await res.json();
+      } else {
+        data = { message: await res.text() };
+      }
+
       setApiResponse(data);
 
       if (res.ok) {
-        // limpiar errores si fue exitoso
-        setErrorUsername("");
-        setErrorEmail("");
-        setErrorPassword("");
+        // Registro exitoso
+        console.log("Registro exitoso:", data);
       } else {
-        // mostrar errores según el status
-        if (data.status === 400 && data.message.includes("Usuario")) {
-          setErrorUsername(data.message);
-          setErrorEmail("");
-          setErrorPassword("");
-        } else if (data.status === 400 && data.message.includes("Email")) {
-          setErrorEmail(data.message);
-          setErrorUsername("");
-          setErrorPassword("");
+        // Manejo de errores según lo que devuelva el backend
+        const errorMessage = data.message || "Error en el registro";
+
+        if (res.status === 400 || res.status === 409) {
+          if (errorMessage.toLowerCase().includes("usuario") || errorMessage.toLowerCase().includes("username")) {
+            setErrorUsername(errorMessage);
+          } else if (errorMessage.toLowerCase().includes("email") || errorMessage.toLowerCase().includes("correo")) {
+            setErrorEmail(errorMessage);
+          } else {
+            setErrorPassword(errorMessage);
+          }
         } else {
-          setErrorPassword(data.message || "Error inesperado");
-          setErrorUsername("");
-          setErrorEmail("");
+          setErrorPassword(errorMessage);
         }
       }
     } catch (err) {
+      console.error("Error de red:", err);
       setErrorPassword("Error de conexión con el servidor");
     }
   };
@@ -123,14 +136,14 @@ function Register() {
         {/* Debug opcional: mostrar JSON completo */}
         {apiResponse && (
           <div style={{ marginTop: "15px", textAlign: "center" }}>
-            <pre>{JSON.stringify(apiResponse, null, 2)}</pre>
+            <pre style={{ color: "white", textAlign: "left", display: "inline-block" }}>
+              {JSON.stringify(apiResponse, null, 2)}
+            </pre>
           </div>
         )}
       </Itemauth>
     </Containerauth>
   );
 }
-
-
 
 export default Register;

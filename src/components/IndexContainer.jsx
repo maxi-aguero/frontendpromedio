@@ -5,11 +5,9 @@ function IndexContainer({ children, color }) {
     display: "flex",
     gap: "15px",
     flexWrap: "wrap",
-    justifyContent: "space-between", // Distribuye el espacio entre los botones
-    width: "100%",                   // Ocupa toda la línea disponible
-    maxWidth: "500px",               // Un ancho máximo para que no se estire demasiado
-    boxSizing: "border-box",
-    borderRadius: "8px"
+    justifyContent: "space-between",
+    width: "100%",           // <--- Ocupa el 100% de la pantalla/línea
+    boxSizing: "border-box"
   };
 
   return <div style={estilo}>{children}</div>;

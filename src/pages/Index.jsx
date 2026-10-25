@@ -1,15 +1,16 @@
-import Container from "../components/Container.jsx";
-import Item from "../components/Item.jsx";
+import IndexContainer from "../components/IndexContainer.jsx";
+import IndexButton from "../components/IndexButton.jsx";
 
 function Index() {
     return (
-            
-            <Container color="#151724">
-                <Item  texto="Iniciar sesion" color="green" />
-
-                <Item texto="Registarse" color="blue" />
-            
-            </Container>
-       );
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", marginTop: "50px", padding: "0 20px" }}>
+            <h2>Bienvenido</h2>
+            <IndexContainer color="#0f111a">
+                <IndexButton texto="Iniciar sesión" color="green" to="/login" />
+                <IndexButton texto="Registrarse" color="blue" to="/register" />
+            </IndexContainer>
+        </div>
+    );
 }
+
 export default Index;

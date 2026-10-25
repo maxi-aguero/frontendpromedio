@@ -2,11 +2,12 @@ import { useEffect, useState } from "react";
 import Container from "../components/Container.jsx";
 import Item from "../components/Item.jsx";
 
-function Promedios(){
-
-
-  const [courses, setCourses] = useState([]);
-  const [title, setTitle] = useState("");
+function Promedios() {
+  const [promedios, setPromedios] = useState([]);
+  const [precioMediares, setPrecioMediares] = useState("");
+  const [novilloKg, setNovilloKg] = useState("");
+  const [totalKg, setTotalKg] = useState("");
+  const [fechaDeCreacion, setFechaDeCreacion] = useState("");
 
   useEffect(() => {
     const token = sessionStorage.getItem("token");
@@ -16,11 +17,11 @@ function Promedios(){
       headers: { "Authorization": `Bearer ${token}` }
     })
       .then(res => res.json())
-      .then(data => setCourses(data))
+      .then(data => setPromedios(data))
       .catch(err => console.error("Error al obtener promedios:", err));
   }, []);
 
-  const handleCreateCourse = async () => {
+  const handleCreatePromedio = async () => {
     const token = sessionStorage.getItem("token");
     if (!token) return;
 
@@ -30,48 +31,74 @@ function Promedios(){
         "Content-Type": "application/json",
         "Authorization": `Bearer ${token}`
       },
-      body: JSON.stringify({ title })
+      body: JSON.stringify({
+        preciomediares: parseFloat(precioMediares),
+        novillokg: parseFloat(novilloKg),
+        totalkg: parseFloat(totalKg),
+        fechadecreacion: fechaDeCreacion
+      })
     });
 
     if (res.ok) {
-      const newCourse = await res.json();
-      setCourses([...courses, newCourse]);
-      setTitle("");
+      const newPromedio = await res.json();
+      setPromedios([...promedios, newPromedio]);
+      setPrecioMediares("");
+      setNovilloKg("");
+      setTotalKg("");
+      setFechaDeCreacion("");
     } else {
-      console.error("Error al crear promedios");
+      console.error("Error al crear promedio");
     }
   };
-return (
-    <div >
-      <h1>Todos los promedios</h1>
 
-      <div>
+  return (
+    <div>
       <section>
-        <h2>Lista de promedios</h2>
+        <h2>Lista de Promedios</h2>
         <Container color="#0f111a">
-            {courses.map(c => (
-              <Item 
-                key={c.id} 
-                id={c.id} 
-                texto={c.preciomediares} 
-                color="#151724" 
-              />
-            ))}
-</Container>
-
+          {promedios.map(p => (
+            <Item 
+              key={p.id} 
+              id={p.id} 
+              texto={`Precio: $${p.preciomediares} | Kg Novillo: ${p.novillokg} | Kg Utilizables: ${p.totalkg}`} 
+              color="#151724" 
+            />
+          ))}
+        </Container>
       </section>
 
-      
+      <section>
+        <h3>Crear nuevo promedio</h3>
+        <input
+          type="number"
+          step="any"
+          value={precioMediares}
+          onChange={e => setPrecioMediares(e.target.value)}
+          placeholder="Precio mediares"
+        />
+        <input
+          type="number"
+          step="any"
+          value={novilloKg}
+          onChange={e => setNovilloKg(e.target.value)}
+          placeholder="Kg de la mediares"
+        />
+        <input
+          type="number"
+          step="any"
+          value={totalKg}
+          onChange={e => setTotalKg(e.target.value)}
+          placeholder="Kg totales utilizables"
+        />
+        <input
+          type="date"
+          value={fechaDeCreacion}
+          onChange={e => setFechaDeCreacion(e.target.value)}
+        />
+        <button onClick={handleCreatePromedio}>Crear</button>
+      </section>
     </div>
+  );
+}
 
-    </div>
-
-
-
-  
-
-   
-
-    
-);}
 export default Promedios;

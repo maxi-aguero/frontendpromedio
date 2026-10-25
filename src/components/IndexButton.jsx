@@ -14,8 +14,9 @@ function IndexButton({ texto, color, to }) {
     alignItems: "center",
     justifyContent: "center",
     borderRadius: "6px",
-    marginBottom: "10px",
-    width: "220px",
+    flex: 1,               // Hace que ambos botones repartan el ancho en partes iguales
+    minWidth: "180px",     // Evita que se reduzcan demasiado en pantallas pequeñas
+    boxSizing: "border-box",
     cursor: "pointer"
   };
 

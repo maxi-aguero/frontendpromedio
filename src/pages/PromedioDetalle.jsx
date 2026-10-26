@@ -33,14 +33,11 @@ function PromedioDetalle() {
     return <p style={{ padding: "20px", color: "#0d2b45" }}>Cargando detalles...</p>;
   }
 
-  // 1. Array simulado de cortes mientras el backend lo incorpora
+  // Array simulado de cortes mientras el backend lo incorpora
   const cortesSimulados = [
-    
-    
     { producto: "Bife ancho", kg: 3.00, precioKg: 15442 },
     { producto: "Bife angosto", kg: 3.40, precioKg: 17456 },
     { producto: "Bife medio", kg: 3.10, precioKg: 17456 },
-    
     { producto: "Litoraleño", kg: 0, precioKg: 0 },
     { producto: "Bide de chorizo", kg: 1.69, precioKg: 24842 },
     { producto: "Asado medio", kg: 6.80, precioKg: 19068 },
@@ -55,7 +52,6 @@ function PromedioDetalle() {
     { producto: "Osobuco", kg: 3.63, precioKg: 14099 },
     { producto: "Orilla/asado promo", kg: 2.46, precioKg: 14099 },
     { producto: "Nalga", kg: 4.00, precioKg: 19068 }
-    
   ];
 
   // Si el backend ya trae 'cortes' o 'detalles', los usa; si no, usa el array simulado
@@ -64,15 +60,31 @@ function PromedioDetalle() {
   return (
     <div style={{ padding: "30px", backgroundColor: "#ffffff", minHeight: "100vh", color: "#0d2b45", fontFamily: "sans-serif", maxWidth: "900px", margin: "0 auto" }}>
       
-      {/* Encabezado y Botón de Volver */}
+      {/* Encabezado y Botones */}
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", borderBottom: "2px solid #e2e8f0", paddingBottom: "15px", marginBottom: "20px" }}>
         <h2 style={{ margin: 0, color: "#0d2b45" }}>Detalle del Promedio #{promedio.id}</h2>
-        <button 
-          onClick={() => navigate("/promedios")} 
-          style={{ padding: "8px 16px", backgroundColor: "#0d2b45", color: "#ffffff", border: "none", cursor: "pointer", borderRadius: "4px" }}
-        >
-          Volver a la lista
-        </button>
+
+        {/* Contenedor para los botones de la derecha */}
+        <div style={{ display: "flex", gap: "10px" }}>
+          {/* Botón Eliminar en rojo (sin funcionalidad por ahora) */}
+          <button 
+            onClick={() => {
+              // Aquí irá la lógica del backend más adelante
+              console.log("Botón eliminar presionado para el ID:", promedio.id);
+            }} 
+            style={{ padding: "8px 16px", backgroundColor: "#dc2626", color: "#ffffff", border: "none", cursor: "pointer", borderRadius: "4px", fontWeight: "bold" }}
+          >
+            Eliminar
+          </button>
+
+          {/* Botón Volver a la lista */}
+          <button 
+            onClick={() => navigate("/promedios")} 
+            style={{ padding: "8px 16px", backgroundColor: "#0d2b45", color: "#ffffff", border: "none", cursor: "pointer", borderRadius: "4px" }}
+          >
+            Volver a la lista
+          </button>
+        </div>
       </div>
 
       {/* Tarjetas de Resumen de Datos Generales */}

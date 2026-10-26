@@ -66,17 +66,51 @@ function PromedioDetalle() {
 
         {/* Contenedor para los botones de la derecha */}
         <div style={{ display: "flex", gap: "10px" }}>
-          {/* Botón Eliminar en rojo (sin funcionalidad por ahora) */}
+         
+          
           <button 
             onClick={() => {
-              // Aquí irá la lógica del backend más adelante
-              console.log("Botón eliminar presionado para el ID:", promedio.id);
+              // 1. Confirmación opcional para evitar borrados accidentales
+              if (!window.confirm("¿Estás seguro de que deseas eliminar este promedio?")) {
+                return;
+              }
+
+              const token = sessionStorage.getItem("token");
+              if (!token) {
+                alert("No hay token de autenticación");
+                return;
+              }
+
+              // 2. Petición DELETE al backend
+              fetch(`https://backendpromedio.onrender.com/api/promedios/${promedio.id}`, {
+                method: "DELETE",
+                headers: {
+                  "Authorization": `Bearer ${token}`
+                }
+              })
+                .then(res => {
+                  if (!res.ok) throw new Error("No se pudo eliminar el promedio");
+                  return res.json();
+                })
+                .then(data => {
+                  console.log("Promedio eliminado con éxito:", data);
+                  // 3. Redirigir a la lista de promedios tras el éxito
+                  navigate("/promedios");
+                })
+                .catch(err => {
+                  console.error("Error:", err);
+                  alert("Error al intentar eliminar el promedio: " + err.message);
+                });
             }} 
             style={{ padding: "8px 16px", backgroundColor: "#dc2626", color: "#ffffff", border: "none", cursor: "pointer", borderRadius: "4px", fontWeight: "bold" }}
           >
             Eliminar
           </button>
-
+          
+          
+          
+          
+          
             <button 
                 onClick={() => {
                   // Aquí irá la lógica del backend más adelante

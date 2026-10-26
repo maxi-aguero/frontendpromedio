@@ -77,6 +77,16 @@ function PromedioDetalle() {
             Eliminar
           </button>
 
+            <button 
+                onClick={() => {
+                  // Aquí irá la lógica del backend más adelante
+                  console.log("Botón modificar presionado para el ID:", promedio.id);
+                }} 
+                style={{ padding: "8px 16px", backgroundColor: "#16a34a", color: "#ffffff", border: "none", cursor: "pointer", borderRadius: "4px", fontWeight: "bold" }}
+              >
+                Modificar
+        </button>
+
           {/* Botón Volver a la lista */}
           <button 
             onClick={() => navigate("/promedios")} 
